@@ -1,0 +1,21 @@
+generator client {
+  provider        = "prisma-client-js"
+  // Cloudflareで実行できように設定
+  previewFeatures = ["driverAdapters"]
+  engineType      = "binary"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Todo Entity
+model Todo {
+  id        Int      @id @default(autoincrement())
+  title     String
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
